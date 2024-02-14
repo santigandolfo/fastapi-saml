@@ -1,6 +1,7 @@
 from typing import get_origin
 
 from pydantic import BaseModel
+from pydantic import ConfigDict
 from pydantic import Field
 from pydantic import field_validator
 from pydantic_core.core_schema import ValidationInfo
@@ -17,6 +18,8 @@ class ParamsBaseModel(BaseModel):
 
 
 class User(ParamsBaseModel):
+    model_config = ConfigDict(populate_by_name=True)
+
     email: str = Field(validation_alias="user.email")
     first_name: str = Field(validation_alias="user.first_name")
     last_name: str = Field(validation_alias="user.last_name")

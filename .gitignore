@@ -8,6 +8,7 @@ wheels/
 
 
 .DS_Store
+.idea
 .venv
 cert.pem
 key.pem
