@@ -1,0 +1,91 @@
+[project]
+name = "fastapi-saml"
+version = "1.0.0"
+description = "Example FastAPI backend that implements SAML2 authentication"
+authors = [
+    { name = "santigandolfo", email = "santiago.v.gandolfo@gmail.com" }
+]
+dependencies = [
+    "fastapi[all]>=0.109.2",
+    "pydantic>=2.6.1",
+    "uvicorn[standard]>=0.27.1",
+    "pydantic-settings>=2.1.0",
+    "pysaml2>=7.3.1",
+    "python-multipart>=0.0.9",
+    "python-jose>=3.3.0",
+]
+readme = "README.md"
+requires-python = ">= 3.12"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = []
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[tool.ruff]
+target-version = "py312"
+
+[tool.ruff.lint]
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "N",  # pep8-naming
+    "I",  # isort
+    "UP",  # pyupgrade
+    "C4",  # flake8-comprehensions
+    "B",  # flake8-bugbear
+    "Q",  # flake8-quotes
+]
+
+ignore = [
+    "E501",
+    "B008",
+    "C901",
+    "B017",
+    "N818",
+]
+
+fixable = ["ALL"]
+unfixable = []
+
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.ruff.lint.isort]
+force-single-line = true
+
+[tool.ruff.format]
+line-ending = "lf"
