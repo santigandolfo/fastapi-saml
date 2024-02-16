@@ -2,9 +2,10 @@ from datetime import datetime
 from datetime import timedelta
 from uuid import uuid4
 
-from entities import User
 from jose import jwt
-from settings import settings
+
+from src.entities import User
+from src.settings import settings
 
 
 def _create_user_token(token_type: str, user: User, lifetime: timedelta) -> str:

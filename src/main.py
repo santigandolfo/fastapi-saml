@@ -1,5 +1,6 @@
 from fastapi import FastAPI
-from views import router
+
+from src.views import router
 
 app = FastAPI(
     title="FastAPI SAML2",

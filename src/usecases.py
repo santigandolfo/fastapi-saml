@@ -1,26 +1,26 @@
 from urllib.parse import urlencode
 
-from entities import User
-from error_codes import NO_AUTHN_RESPONSE_IN_SAML_RESPONSE
-from error_codes import NO_USER_IDENTITY_IN_SAML_RESPONSE
-from errors import SAMLAuthError
 from saml2 import BINDING_HTTP_POST
 from saml2.client import Saml2Client
 from saml2.response import AuthnResponse
-from utils import get_custom_jwt
+
+from src.entities import User
+from src.error_codes import NO_AUTHN_RESPONSE_IN_SAML_RESPONSE
+from src.error_codes import NO_USER_IDENTITY_IN_SAML_RESPONSE
+from src.errors import SAMLAuthError
+from src.utils import get_custom_jwt
 
 
 class SamlUsecases:
-    def __init__(self, saml_client: Saml2Client, frontend_url: str):
+    def __init__(self, saml_client: Saml2Client, frontend_url: str) -> None:
         self.saml_client = saml_client
         self.frontend_url = frontend_url
 
     def signin(self) -> str:
         _, info = self.saml_client.prepare_for_authenticate()
-        redirect_url = dict(info["headers"]).get("Location", "")
-        return redirect_url
+        return dict(info["headers"]).get("Location", "")
 
-    def _parse_saml_response(self, saml_response: str):
+    def _parse_saml_response(self, saml_response: str) -> AuthnResponse:
         try:
             authn_response = self.saml_client.parse_authn_request_response(
                 saml_response, BINDING_HTTP_POST
@@ -38,7 +38,7 @@ class SamlUsecases:
             ) from e
 
     @staticmethod
-    def _get_identity(authn_response: AuthnResponse):
+    def _get_identity(authn_response: AuthnResponse) -> dict:
         try:
             identity = authn_response.get_identity()
             if not identity:

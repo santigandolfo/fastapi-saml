@@ -10,7 +10,7 @@ from pydantic_core.core_schema import ValidationInfo
 class ParamsBaseModel(BaseModel):
     @field_validator("*", mode="before")
     @classmethod
-    def validate_value(cls, value, info: ValidationInfo):
+    def validate_value(cls, value: any, info: ValidationInfo) -> any:
         value_type = cls.model_fields[info.field_name].annotation
         if value_type is list or get_origin(value_type) is list:
             return value
