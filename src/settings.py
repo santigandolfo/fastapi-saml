@@ -24,7 +24,7 @@ class Settings(BaseSettings):
     want_response_signed: bool
     frontend_url: str
 
-    def get_saml_config(self):
+    def get_saml_config(self) -> dict:
         return {
             "metadata": {"remote": [{"url": self.remote_metadata}]},
             "allow_unknown_attributes": True,
