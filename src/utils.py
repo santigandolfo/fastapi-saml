@@ -1,15 +1,16 @@
+from datetime import UTC
 from datetime import datetime
 from datetime import timedelta
 from uuid import uuid4
 
-from jose import jwt
+import jwt
 
 from src.entities import User
 from src.settings import settings
 
 
 def _create_user_token(token_type: str, user: User, lifetime: timedelta) -> str:
-    now = datetime.utcnow()
+    now = datetime.now(UTC)
     token_payload = {
         "token_type": token_type,
         "exp": now + lifetime,
