@@ -20,25 +20,28 @@ class Settings(BaseSettings):
     remote_metadata: str
     allow_unknown_attributes: bool
     debug: bool
-    entityid: str
+    entity_id: str
+    want_assertions_signed: bool
     want_response_signed: bool
+    allow_unsolicited: bool
     frontend_url: str
 
     def get_saml_config(self) -> dict:
         return {
             "metadata": {"remote": [{"url": self.remote_metadata}]},
-            "allow_unknown_attributes": True,
+            "allow_unknown_attributes": self.allow_unknown_attributes,
             "debug": self.debug,
-            "entityid": self.entityid,
+            "entityid": self.entity_id,
             "service": {
                 "sp": {
                     "endpoints": {
                         "assertion_consumer_service": [
-                            (self.entityid, BINDING_HTTP_REDIRECT),
-                            (self.entityid, BINDING_HTTP_POST),
+                            (self.entity_id, BINDING_HTTP_REDIRECT),
+                            (self.entity_id, BINDING_HTTP_POST),
                         ],
                     },
-                    "allow_unsolicited": True,
+                    "allow_unsolicited": self.allow_unsolicited,
+                    "want_assertions_signed,": self.want_assertions_signed,
                     "want_response_signed": self.want_response_signed,
                 },
             },
