@@ -50,6 +50,17 @@ openssl req -x509 -nodes -newkey rsa:4096 -keyout key.pem -out cert.pem -days 36
 Please ensure these files are kept secure, and remember to include `key.pem` and `cert.pem` in your
 `.gitignore` file to prevent them from being committed to your repository.
 
+## Environment Setup
+
+To set up your environment variables, copy the contents of the `.env.example` file to a new file
+named `.env`. You can do this using the following command:
+
+```bash
+cp .env.example .env
+```
+
+Then, update the values in the `.env` file as needed for your setup.
+
 ## Run
 
 To start the service locally you should execute the command:
